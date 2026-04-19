@@ -1,15 +1,13 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/customer', function () {
-    return view('customer.index', ['title' => 'Customer']);
-});
+Route::get('/customer', [CustomerController::class, 'index']);
+Route::get('/customer/create', [CustomerController::class, 'create']);
 
-Route::get('/customer/create', function () {
-    return view('customer.create', ['title' => 'Customer Create']);
-});
+

@@ -14,7 +14,12 @@
         @foreach ($customers as $customer )
     
         <li class="list-group-item">
-            {{ $loop->iteration }}. {{ $customer->name }} || {{ $customer->email }} || {{ $customer->No_telepon }} || {{ $customer->Alamat }} || {{ $customer->pekerjaan }}</li>
+    
+    {{ $loop->iteration }}. {{ $customer->name }} || {{ $customer->email }} || {{ $customer->No_telepon }} || {{ $customer->Alamat }} || {{ $customer->pekerjaan }}
+    
+    <a class="btn btn-primary mb-3" href="{{ route('customer.edit', $customer) }}" role="button">Edit</a>
+        
+</li>
         @endforeach
     </ul>
 

@@ -14,7 +14,8 @@ class CustomerController extends Controller
     {
         return view('customer.index', [
             'title' => 'customer',
-            'customers' => customer::all(),
+            'customers' => customer::latest()->get(),
+            //'customers' => customer::orderBy('name',)->get()
             ]);
     }
 
@@ -112,6 +113,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+    $customer->delete();
+    return to_route('customer.index')->withSuccess('Data Telah Berhasil Dihapus');
     }
 }

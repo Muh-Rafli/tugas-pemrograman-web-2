@@ -17,8 +17,15 @@
     
     {{ $loop->iteration }}. {{ $customer->name }} || {{ $customer->email }} || {{ $customer->No_telepon }} || {{ $customer->Alamat }} || {{ $customer->pekerjaan }}
     
-    <a class="btn btn-primary mb-3" href="{{ route('customer.edit', $customer) }}" role="button">Edit</a>
-        
+    <a class="btn btn-primary btn-sm" href="{{ route('customer.edit', $customer) }}" role="button">Edit</a>
+       
+    <form action="{{ route('customer.destroy', $customer) }}" method="POST" class="d-inline">
+    @method('DELETE')
+    @csrf
+
+    <button type="submit" class="btn btn-danger btn-sm"onclick="return confirm('Anda Yakin')">Delete</button>
+</form>
+
 </li>
         @endforeach
     </ul>

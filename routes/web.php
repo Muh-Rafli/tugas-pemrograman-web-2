@@ -21,5 +21,6 @@ Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kat
 Route::post('/kategori/store', [KategoriController::class, 'store'])->name('kategori.store');
 Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
 Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
+Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 Route::resource('produk', ProdukController::class);
 

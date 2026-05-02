@@ -18,7 +18,7 @@
     {{ $loop->iteration }}. {{ $customer->name }} || {{ $customer->email }} || {{ $customer->No_telepon }} || {{ $customer->Alamat }} || {{ $customer->pekerjaan }}
     
     <a class="btn btn-primary btn-sm" href="{{ route('customer.edit', $customer) }}" role="button">Edit</a>
-       
+
     <form action="{{ route('customer.destroy', $customer) }}" method="POST" class="d-inline">
     @method('DELETE')
     @csrf

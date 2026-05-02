@@ -3,30 +3,20 @@
     <x-slot:title>{{ $title }}</x-slot>
 
     @session('success')
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endsession
-    
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endsession
+
     <a class="btn btn-warning mb-3" href="{{ route('produk.create') }}" role="button">Create</a>
 
     <ul class="list-group">
-        @foreach ($produks as $produk )
-    
-        <li class="list-group-item">
-    
-    {{ $loop->iteration }}. {{ $produk->nama_produk }}|| {{ $produk->stok }} || {{ $produk->harga }}  || {{ $produk->satuan }} ||{{ $produk->kategori_id }} || {{ $produk->kategori->deskripsi }}
-    <a class="btn btn-primary btn-sm" href="{{ route('produk.edit', $produk) }}" role="button">Edit</a>
+        @foreach ($produks as $produk)
+            <li class="list-group-item">
 
-    <form action="{{ route('produk.destroy', $produk) }}" method="POST" class="d-inline">
-    @method('DELETE')
-    @csrf
-
-    <button type="submit" class="btn btn-danger btn-sm"onclick="return confirm('Anda Yakin')">Delete</button>
-</form>
-
-</li>
+                {{ $loop->iteration }}. {{ $produk->nama_produk }}|| {{ $produk->stok }} || {{ $produk->harga }} ||
+                {{ $produk->satuan }} ||{{ $produk->kategori_id }} || {{ $produk->kategori->deskripsi }}
+            </li>
         @endforeach
     </ul>
-
 </x-app>

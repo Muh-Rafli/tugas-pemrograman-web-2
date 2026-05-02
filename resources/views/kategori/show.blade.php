@@ -6,7 +6,7 @@
     <a class="btn btn-primary mb-3" href="{{ route('kategori.index') }}" role="button">Back</a>
 
     {{-- Kategori --}}
-
+<h6>Kategori</h6>
     <ul class="list-group">
   <li class="list-group-item">Name: {{ $kategori->name_kategori }}</li>
   <li class="list-group-item">Created at:{{ $kategori->created_at->format('d F Y H:i:s') }}</li>

@@ -16,7 +16,8 @@
         <li class="list-group-item">
         
     {{ $loop->iteration }}. {{ $kategori->name_kategori }} || {{ $kategori->kode_kategori }} || {{ $kategori->deskripsi }}
-    
+
+    <a class="btn btn-primary mb-3" href="{{ route('kategori.edit',$kategori) }}" role="button">Edit</a>
 </form>
 
 </li>

@@ -19,5 +19,7 @@ Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->n
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
 Route::post('/kategori/store', [KategoriController::class, 'store'])->name('kategori.store');
+Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
+Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
 Route::resource('produk', ProdukController::class);
 

@@ -23,7 +23,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori.create', ['title' => 'kategori create']);
+    
     }
 
     /**
@@ -31,7 +32,20 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'name_kategori' => 'required|string|max:255',
+        'kode_kategori' => 'required|string|unique:kategoris,kode_kategori',
+        'deskripsi'     => 'required|string',
+    ], [
+        'name_kategori.required' => 'Nama Kategori Tidak Boleh Kosong',
+        'name_kategori.max'      => 'Nama Kategori Tidak Boleh lebih dari 255 karakter',
+        'kode_kategori.required' => 'Kode Kategori Tidak Boleh Kosong',
+        'kode_kategori.unique'   => 'Kode Kategori Sudah Ada, Gunakan Kode Lain',
+        'deskripsi.required'     => 'Deskripsi Tidak Boleh Kosong',
+    ]);
+    Kategori::create($validated);
+
+    return to_route('kategori.index')->withSuccess('Data Telah Berhasil Ditambahkan');
     }
 
     /**

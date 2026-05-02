@@ -17,6 +17,7 @@
         
     {{ $loop->iteration }}. {{ $kategori->name_kategori }} || {{ $kategori->kode_kategori }} || {{ $kategori->deskripsi }}
 
+    <a class="btn btn-info btn-sm" href="{{ route('kategori.show',$kategori) }}" role="button">Detail</a>
     <a class="btn btn-primary btn-sm" href="{{ route('kategori.edit',$kategori) }}" role="button">Edit</a>
     <form action="{{ route('kategori.destroy',$kategori) }}" method="POST"class="d-inline">
     @method('DELETE')

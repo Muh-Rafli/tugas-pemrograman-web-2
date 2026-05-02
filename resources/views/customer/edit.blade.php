@@ -4,13 +4,13 @@
 
     <form method="POST" action="{{ route('customer.update',$customer) }}">
     @csrf
-
     @method('PUT')
 
-    <form>
+    
     <div class="mb-3">
     <label for="name" class="form-label">Nama</label>
-    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name',$customer->name) }}">
+    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+    value="{{ old('name',$customer->name) }}">
     
     @error('name')
     <div class="invalid-feedback">{{ $message }}</div>
@@ -19,8 +19,9 @@
     </div>
     <div class="mb-3">
     <label for="email" class="form-label">Email</label>
-    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="email" value="{{ old('email',$customer->email) }}">
-   
+    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" 
+    value="{{ old('email',$customer->email) }}">
+
 
     @error('email')
     <div class="invalid-feedback">{{ $message }}</div>
@@ -29,7 +30,8 @@
     </div>
     <div class="mb-3">
     <label for="No_telepon" class="form-label">No_telepon</label>
-    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="no_telepon" value="{{ old('no_telepon', $customer->no_telepon) }}">
+    <input type="text" class="form-control @error('No_telepon') is-invalid @enderror" id="No_telepon" name="No_telepon" 
+    value="{{ old('No_telepon', $customer->No_telepon) }}">
     
 
     @error('No_telepon')
@@ -39,7 +41,8 @@
     </div>
     <div class="mb-3">
     <label for="Alamat" class="form-label">Alamat</label>
-    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="alamat" value="{{ old('alamat', $customer->alamat) }}">
+    <input type="text" class="form-control @error('Alamat') is-invalid @enderror" id="Alamat" name="Alamat" 
+    value="{{ old('Alamat', $customer->Alamat) }}">
     
 
     @error('Alamat')
@@ -48,10 +51,11 @@
 
     </div>
     <div class="mb-3">
-    <label for="Pekerjaan" class="form-label">Pekerjaan</label>
-    <input type="text" class="form-control @error('pekerjaan') is-invalid @enderror" id="pekerjaan" name="pekerjaan" value="{{ old('pekerjaan', $customer->pekerjaan) }}">
+    <label for="pekerjaan" class="form-label">Pekerjaan</label>
+    <input type="text" class="form-control @error('pekerjaan') is-invalid @enderror" id="pekerjaan" name="pekerjaan" 
+    value="{{ old('pekerjaan', $customer->pekerjaan) }}">
 
-    @error('Pekerjaan')
+    @error('pekerjaan')
     <div class="invalid-feedback">{{ $message }}</div>
 @enderror
     </div>
@@ -61,5 +65,4 @@
 </form>
 
 </x-app>
-   
 

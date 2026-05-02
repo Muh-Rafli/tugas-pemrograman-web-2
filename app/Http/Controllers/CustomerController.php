@@ -35,8 +35,8 @@ class CustomerController extends Controller
         $validated = $request->validate([
         'name' => 'required|max:255',
         'email' => 'required|email|max:25',
-        'no_telepon' => 'required|numeric|digits_between:10,15',
-        'alamat' => 'required|string',
+        'No_telepon' => 'required|numeric|digits_between:10,15',
+        'Alamat' => 'required|string',
         'pekerjaan' => 'required|string|max:100',
     ],[
         'name.required' => 'Nama Tidak Boleh Kosong',
@@ -44,12 +44,11 @@ class CustomerController extends Controller
         'email.required' => 'Email Tidak Boleh Kosong',
         'email.email' => 'Format Email Tidak Valid',
         'email.max' => 'Email Tidak boleh lebih dari karakter',
-        'no_telepon.required' => 'Nama Tidak Boleh Kosong',
-        'no_telepon.numeric' => 'No_telepon harus berupa angka',
-        'No_telepon.digits_between' => 'No_telepon harus antara 10 sampai 15 digit',
-        'alamat.required' => 'Alamat Tidak Boleh Kosong',
-        'pekerjaan.required' => 'Nama Tidak Boleh Kosong',
-        'pekerjaan.max' => 'Nama Tidak boleh lebih dari 100 karakter',
+        'No_telepon.required' => 'No_teleponTidak Boleh Kosong',
+        'No_telepon.numeric' => 'No_telepon harus berupa angka',
+        'Alamat.required' => 'Alamat Tidak Boleh Kosong',
+        'pekerjaan.required' => 'pekerjaan Tidak Boleh Kosong',
+        'pekerjaan.max' => 'pekerjaan Tidak boleh lebih dari 100 karakter',
 
     ]);
 
@@ -85,8 +84,8 @@ class CustomerController extends Controller
         $validated = $request->validate([
         'name' => 'required|max:255',
         'email' => 'required|email|max:25',
-        'no_telepon' => 'required|numeric|digits_between:10,15',
-        'alamat' => 'required|string',
+        'No_telepon' => 'required|numeric|digits_between:10,15',
+        'Alamat' => 'required|string',
         'pekerjaan' => 'required|string|max:100',
     ],[
         'name.required' => 'Nama Tidak Boleh Kosong',
@@ -94,12 +93,11 @@ class CustomerController extends Controller
         'email.required' => 'Email Tidak Boleh Kosong',
         'email.email' => 'Format Email Tidak Valid',
         'email.max' => 'Email Tidak boleh lebih dari karakter',
-        'no_telepon.required' => 'Nama Tidak Boleh Kosong',
-        'no_telepon.numeric' => 'No_telepon harus berupa angka',
-        'No_telepon.digits_between' => 'No_telepon harus antara 10 sampai 15 digit',
-        'alamat.required' => 'Alamat Tidak Boleh Kosong',
-        'pekerjaan.required' => 'Nama Tidak Boleh Kosong',
-        'pekerjaan.max' => 'Nama Tidak boleh lebih dari 100 karakter',
+        'No_telepon.required' => 'No_telepon Tidak Boleh Kosong',
+        'No_telepon.numeric' => 'No_telepon harus berupa angka',
+        'Alamat.required' => 'Alamat Tidak Boleh Kosong',
+        'pekerjaan.required' => 'Pekerjaan Tidak Boleh Kosong',
+        'pekerjaan.max' => 'Pekerjaan Tidak boleh lebih dari 100 karakter',
 
     ]);
 
@@ -114,6 +112,6 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
     $customer->delete();
-    return to_route('customer.index')->withSuccesss('Data Telah Berhasil Dihapus');
+    return to_route('customer.index')->withSuccess('Data Telah Berhasil Dihapus');
     }
 }

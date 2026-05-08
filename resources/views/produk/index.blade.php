@@ -17,6 +17,14 @@
     {{ $loop->iteration }}. {{ $produk->nama_produk }}|| {{ $produk->kategori->name_kategori }} || {{ $produk->harga }}  || {{ $produk->stok }} ||{{ $produk->satuan }} 
 
     <a class="btn btn-primary btn-sm" href="{{ route('produk.edit',$produk) }}" role="button">Edit</a>
+    <form action="{{ route('produk.destroy',$produk) }}" method="POST"class="d-inline">
+    @method('DELETE')
+    @csrf
+
+    <button type="submit" class="btn btn-danger btn-sm"onclick="return confirm('Anda Yakin')">Delete</button>
+
+</form>
+
 </form>
 
 </li>

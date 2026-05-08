@@ -7,22 +7,14 @@
         {{ session('success') }}
     </div>
 @endsession
-    
-    <a class="btn btn-warning mb-3" href="{{ route('produk.create') }}" role="button">Create</a>
 
     <ul class="list-group">
         @foreach ($produks as $produk )
     
         <li class="list-group-item">
     
-    {{ $loop->iteration }}. {{ $produk->nama_produk }}|| {{ $produk->stok }} || {{ $produk->harga }}  || {{ $produk->satuan }} ||{{ $produk->kategori_id }} || {{ $produk->kategori->deskripsi }}
-    <a class="btn btn-primary btn-sm" href="{{ route('produk.edit', $produk) }}" role="button">Edit</a>
+    {{ $loop->iteration }}. {{ $produk->nama_produk }}|| {{ $produk->kategori->name_kategori }} || {{ $produk->harga }}  || {{ $produk->stok }} ||{{ $produk->satuan }} 
 
-    <form action="{{ route('produk.destroy', $produk) }}" method="POST" class="d-inline">
-    @method('DELETE')
-    @csrf
-
-    <button type="submit" class="btn btn-danger btn-sm"onclick="return confirm('Anda Yakin')">Delete</button>
 </form>
 
 </li>

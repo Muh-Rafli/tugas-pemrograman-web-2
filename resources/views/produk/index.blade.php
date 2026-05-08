@@ -15,7 +15,8 @@
         <li class="list-group-item">
     
     {{ $loop->iteration }}. {{ $produk->nama_produk }}|| {{ $produk->kategori->name_kategori }} || {{ $produk->harga }}  || {{ $produk->stok }} ||{{ $produk->satuan }} 
-    
+
+    <a class="btn btn-primary btn-sm" href="{{ route('produk.edit',$produk) }}" role="button">Edit</a>
 </form>
 
 </li>

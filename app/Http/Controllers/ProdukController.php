@@ -61,7 +61,10 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        //
+        return view('produk.show', [
+            'title' => 'Detail produk',
+            'produk' => $produk
+        ]);
     }
 
     /**
@@ -83,7 +86,7 @@ class ProdukController extends Controller
     {
         $validated = $request->validate([
             'kategori_id' => 'required',
-            'nama_produk' => 'required|min:3|max:255',
+            'nama_produk' => 'required',
             'harga'       => 'required|numeric',
             'stok'        => 'required|numeric',
             'satuan'      => 'required|string|max:50',

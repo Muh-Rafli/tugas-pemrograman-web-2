@@ -16,6 +16,7 @@
     
     {{ $loop->iteration }}. {{ $produk->nama_produk }}|| {{ $produk->kategori->name_kategori }} || {{ $produk->harga }}  || {{ $produk->stok }} ||{{ $produk->satuan }} 
 
+    <a class="btn btn-info btn-sm" href="{{ route('produk.show',$produk) }}" role="button">Detail</a>
     <a class="btn btn-primary btn-sm" href="{{ route('produk.edit',$produk) }}" role="button">Edit</a>
     <form action="{{ route('produk.destroy',$produk) }}" method="POST"class="d-inline">
     @method('DELETE')

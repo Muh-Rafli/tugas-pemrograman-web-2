@@ -2,7 +2,9 @@
     <x-slot:title>{{ $title }}</x-slot:title>
 
     <a class="btn btn-primary mb-3" href="{{ route('produk.index') }}" role="button">Back</a>
-
+    
+    {{-- Produk --}}
+    <h6>Data Produk</h6>
     <ul class="list-group">
         <li class="list-group-item">Nama Produk: {{ $produk->nama_produk }}</li>
         <li class="list-group-item">Kategori: {{ $produk->kategori->name_kategori }}</li>

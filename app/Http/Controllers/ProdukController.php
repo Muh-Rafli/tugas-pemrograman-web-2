@@ -13,9 +13,21 @@ class ProdukController extends Controller
      */
     public function index()
     {
+        $keyword = request('keyword');
+        $produk = Produk::latest();
+        if ($keyword) {
+            $produk = $produk->where('nama_roduk', 'like', '%'.$keyword.'%')
+                                ->orWhere('kategori_id','like', '%'.$keyword.'%')
+                                ->orwhere('harga','like', '%'.$keyword.'%')
+                                ->orwhere('stok','like', '%'.$keyword.'%')
+                                ->orwhere('satuan','like', '%'.$keyword.'%');
+        }
+
+
         return view('produk.index', [
             'title' => 'produk',
-            'produks' => Produk::latest()->get(),
+            'kategoris' => Kategori::latest()->get(),
+            'produks' => $produk->paginate(5)->withQueryString(),
         ]);
     }
 
@@ -25,7 +37,7 @@ class ProdukController extends Controller
     public function create()
     {
         return view('produk.create', ['title' => 'Produk Create',
-        'kategoris' => Kategori::latest()->get()]);
+            'kategoris' => Kategori::latest()->get()]);
     }
 
     /**
@@ -36,19 +48,19 @@ class ProdukController extends Controller
         $validated = $request->validate([
             'kategori_id' => 'required',
             'nama_produk' => 'required|min:3|max:255',
-            'harga'       => 'required|numeric',
-            'stok'        => 'required|numeric',
-            'satuan'      => 'required|string|max:50',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric',
+            'satuan' => 'required|string|max:50',
         ], [
-            
+
             'kategori_id.required' => 'Pilih kategori terlebih dahulu',
             'nama_produk.required' => 'Nama produk tidak boleh kosong',
-            'nama_produk.min'      => 'Nama produk minimal 3 karakter',
-            'harga.required'       => 'Harga harus diisi',
-            'harga.numeric'        => 'Harga harus berupa angka',
-            'stok.required'        => 'Stok tidak boleh kosong',
-            'stok.numeric'         => 'Stok harus berupa angka',
-            'satuan.required'      => 'Satuan (pcs/box) harus diisi',
+            'nama_produk.min' => 'Nama produk minimal 3 karakter',
+            'harga.required' => 'Harga harus diisi',
+            'harga.numeric' => 'Harga harus berupa angka',
+            'stok.required' => 'Stok tidak boleh kosong',
+            'stok.numeric' => 'Stok harus berupa angka',
+            'satuan.required' => 'Satuan (pcs/box) harus diisi',
         ]);
 
         Produk::create($validated);
@@ -63,7 +75,7 @@ class ProdukController extends Controller
     {
         return view('produk.show', [
             'title' => 'Detail produk',
-            'produk' => $produk
+            'produk' => $produk,
         ]);
     }
 
@@ -75,7 +87,7 @@ class ProdukController extends Controller
         return view('produk.edit', [
             'title' => 'Edit Produk',
             'produk' => $produk,
-            'kategoris' => Kategori::all()
+            'kategoris' => Kategori::all(),
         ]);
     }
 
@@ -87,19 +99,19 @@ class ProdukController extends Controller
         $validated = $request->validate([
             'kategori_id' => 'required',
             'nama_produk' => 'required',
-            'harga'       => 'required|numeric',
-            'stok'        => 'required|numeric',
-            'satuan'      => 'required|string|max:50',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric',
+            'satuan' => 'required|string|max:50',
         ], [
-            
+
             'kategori_id.required' => 'Pilih kategori terlebih dahulu',
             'nama_produk.required' => 'Nama produk tidak boleh kosong',
-            'nama_produk.min'      => 'Nama produk minimal 3 karakter',
-            'harga.required'       => 'Harga harus diisi',
-            'harga.numeric'        => 'Harga harus berupa angka',
-            'stok.required'        => 'Stok tidak boleh kosong',
-            'stok.numeric'         => 'Stok harus berupa angka',
-            'satuan.required'      => 'Satuan (pcs/box) harus diisi',
+            'nama_produk.min' => 'Nama produk minimal 3 karakter',
+            'harga.required' => 'Harga harus diisi',
+            'harga.numeric' => 'Harga harus berupa angka',
+            'stok.required' => 'Stok tidak boleh kosong',
+            'stok.numeric' => 'Stok harus berupa angka',
+            'satuan.required' => 'Satuan (pcs/box) harus diisi',
         ]);
 
         $produk->update($validated);
@@ -113,6 +125,7 @@ class ProdukController extends Controller
     public function destroy(Produk $produk)
     {
         $produk->delete();
+
         return redirect()->route('produk.index')->withsuccess('Produk berhasil dihapus');
     }
 }

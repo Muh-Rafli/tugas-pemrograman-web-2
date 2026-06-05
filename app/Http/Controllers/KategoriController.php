@@ -12,9 +12,17 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        $keyword = request('keyword');
+        $kategori = Kategori::latest();
+        if ($keyword) {
+            $kategori = $kategori->where('name_kategori', 'like', '%'.$keyword.'%')
+                                ->orWhere('kode_kategori','like', '%'.$keyword.'%')
+                                ->orwhere('deskripsi','like', '%'.$keyword.'%');
+        }
+    
         return view('kategori.index', [
             'title' => 'kategori',
-            'kategoris' => Kategori::latest()->get(),
+            'kategoris' => $kategori->paginate(2)->withQueryString(),
         ]);
     }
 
@@ -54,7 +62,7 @@ class KategoriController extends Controller
     public function show(Kategori $kategori)
     {
         return view('kategori.show', [
-            'title' => 'Detail kategori'. $kategori -> name_kategori,
+            'title' => 'Detail kategori',
             'kategori' => $kategori
         ]);
     }

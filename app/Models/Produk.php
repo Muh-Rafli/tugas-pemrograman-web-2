@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
 #[Fillable(['kategori_id','nama_produk','harga','stok','satuan','keterangan'])]
 class Produk extends Model
 {
@@ -16,4 +17,5 @@ class Produk extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+
 }

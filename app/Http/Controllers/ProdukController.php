@@ -51,6 +51,7 @@ class ProdukController extends Controller
             'harga' => 'required|numeric',
             'stok' => 'required|numeric',
             'satuan' => 'required|string|max:50',
+            'diskon' => 'nullable|numeric|min:0|max:100',
         ], [
 
             'kategori_id.required' => 'Pilih kategori terlebih dahulu',
@@ -61,13 +62,25 @@ class ProdukController extends Controller
             'stok.required' => 'Stok tidak boleh kosong',
             'stok.numeric' => 'Stok harus berupa angka',
             'satuan.required' => 'Satuan (pcs/box) harus diisi',
+            'diskon.numeric' => 'Diskon Berupa Angka',
+            'diskon.min' => 'Diskon Minimal 0%',
+            'diskon.max' => 'Diskon Maksimal 100%'
         ]);
 
         Produk::create($validated);
 
         return redirect()->route('produk.index')->withsuccess('Data produk berhasil disimpan');
+    
+    try {
+            DB::beginTransaction();
+            Produk::create($validated);
+            DB::commit();
+            return to_route('produk.index')->withSuccess('Data produk berhasil ditambahkan');
+        }catch (\Exception $e){
+            DB::rollBack();
+            return to_route('produk.create')->withError('Data produk gagal ditambahkan');
+        }
     }
-
     /**
      * Display the specified resource.
      */

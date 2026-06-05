@@ -16,6 +16,7 @@ Route::get('/customer/{customer}/edit', [CustomerController::class, 'edit'])->na
 Route::put('/customer/{customer}', [CustomerController::class, 'update'])->name('customer.update');
 Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 
+Route::get('produk/trash', [ProdukController::class, 'trash'])->name('produk.trash');
 
 Route::resource('kategori', KategoriController::class);
 Route::resource('produk', ProdukController::class);

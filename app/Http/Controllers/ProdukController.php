@@ -155,4 +155,12 @@ class ProdukController extends Controller
 
         return redirect()->route('produk.index')->withsuccess('Produk berhasil dihapus');
     }
+
+    public function trash(){
+
+        return view('produk.trash', [
+            'title' => 'Trash Produk',
+            'Produk' => Produk::onlyTrashed()->get(),
+        ]);
+    }
 }

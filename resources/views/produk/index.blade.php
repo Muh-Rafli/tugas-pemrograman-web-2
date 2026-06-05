@@ -37,7 +37,7 @@
             <li class="list-group-item">
                 {{ $produks->firstItem() + $loop->index }}. {{ $produk->nama_produk }} ||
                 {{ $produk->kategori->name_kategori }} || {{ $produk->harga }} || {{ $produk->stok }} ||
-                {{ $produk->satuan }}
+                {{ $produk->satuan }} || {{ $produk->diskon }}
 
                 <a class="btn btn-info btn-sm ms-2" href="{{ route('produk.show', $produk) }}"
                     role="button">detail</a>

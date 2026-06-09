@@ -20,6 +20,7 @@
         <a class="nav-link active"  href="{{ route('customer.index') }}">Customer</a>
         <a class="nav-link active"  href="{{ route('kategori.index') }}">Kategori</a>
         <a class="nav-link active"  href="{{ route('produk.index') }}">Produk</a>
+         <a class="nav-link active" href="{{ route('produk.trash') }}">Trash</a>
         
       </div>
     </div>

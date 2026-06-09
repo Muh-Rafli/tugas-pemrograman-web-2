@@ -24,6 +24,7 @@ class ProdukFactory extends Factory
             'harga' => fake()->numberBetween(10000, 500000),
             'stok' => fake()->numberBetween(1, 1000),
             'satuan' => fake()->randomElement(['pcs', 'unit', 'box', 'kg']),
+            'diskon' => fake()->numberBetween(10, 100),
 
         ];
     }

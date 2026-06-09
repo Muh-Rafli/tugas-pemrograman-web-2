@@ -60,6 +60,16 @@
             @enderror
         </div>
 
+        <div class="mb-3">
+            <label for="diskon" class="form-label">Satuan</label>
+            <input type="text" name="diskon" id="diskon" 
+                class="form-control @error('diskon') is-invalid @enderror"
+                value="{{ old('diskon', $produk->diskon) }}">
+            @error('diskon')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
         <a href="{{ route('produk.index') }}" class="btn btn-secondary">Cancel</a>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

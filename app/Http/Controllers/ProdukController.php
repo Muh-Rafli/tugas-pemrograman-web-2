@@ -11,26 +11,36 @@ class ProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $keyword = request('keyword');
-        $produk = Produk::latest();
-        if ($keyword) {
-            $produk = $produk->where('nama_roduk', 'like', '%'.$keyword.'%')
-                                ->orWhere('kategori_id','like', '%'.$keyword.'%')
-                                ->orwhere('harga','like', '%'.$keyword.'%')
-                                ->orwhere('stok','like', '%'.$keyword.'%')
-                                ->orwhere('satuan','like', '%'.$keyword.'%');
-        }
+public function index(Request $request)
+{
+    $keyword = $request->input('keyword');
+    $kategoriId = $request->input('kategori_id');
+
+    
+    $produk = Produk::latest();
 
 
-        return view('produk.index', [
-            'title' => 'produk',
-            'kategoris' => Kategori::latest()->get(),
-            'produks' => $produk->paginate(5)->withQueryString(),
-        ]);
+    if ($request->filled('kategori_id')) {
+        $produk->where('kategori_id', $kategoriId);
     }
 
+    
+    if ($request->filled('keyword')) {
+        $produk->where(function ($query) use ($keyword) {
+            $query->where('nama_produk', 'like', '%' . $keyword . '%')
+            ->orWhere('harga', 'like', '%' . $keyword . '%')
+            ->orWhere('stok', 'like', '%' . $keyword . '%')
+            ->orWhere('satuan', 'like', '%' . $keyword . '%')
+            ->orWhere('diskon', 'like', '%' . $keyword . '%');
+        });
+    }
+
+    return view('produk.index', [
+        'title' => 'produk',
+        'kategoris' => Kategori::latest()->get(),
+        'produks' => $produk->paginate(5)->withQueryString(),
+    ]);
+}
     /**
      * Show the form for creating a new resource.
      */
@@ -73,10 +83,13 @@ class ProdukController extends Controller
     
     try {
             DB::beginTransaction();
+
             Produk::create($validated);
+
             DB::commit();
             return to_route('produk.index')->withSuccess('Data produk berhasil ditambahkan');
-        }catch (\Exception $e){
+
+        } catch (\Exception $e){
             DB::rollBack();
             return to_route('produk.create')->withError('Data produk gagal ditambahkan');
         }
@@ -137,9 +150,12 @@ class ProdukController extends Controller
         return redirect()->route('produk.index')->withsuccess('Data produk berhasil diubah');
         try {
             DB::beginTransaction();
+
             Produk::create($validated);
+
             DB::commit();
             return to_route('produk.index')->withSuccess('Data produk berhasil diubah');
+
         }catch (\Exception $e){
             DB::rollBack();
             return to_route('produk.create')->withError('Data produk gagal diubah');
@@ -160,7 +176,15 @@ class ProdukController extends Controller
 
         return view('produk.trash', [
             'title' => 'Trash Produk',
-            'Produk' => Produk::onlyTrashed()->get(),
+            'produks' => Produk::onlyTrashed()->get(),
         ]);
+    }
+    public function restore($id)
+    {
+        $produk = Produk::withTrashed()->findOrFail($id);
+
+        $produk->restore();
+
+        return redirect()->route('produk.trash')->withSuccess('Data berhasil dikembalikan');
     }
 }

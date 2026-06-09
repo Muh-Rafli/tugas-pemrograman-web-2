@@ -187,4 +187,11 @@ public function index(Request $request)
 
         return redirect()->route('produk.trash')->withSuccess('Data berhasil dikembalikan');
     }
+    public function forceDelete(Produk $produk)
+    {
+        
+        $produk->forceDelete();
+        return to_route('produk.trash')->withSuccess('Data berhasil dihapus secara permanen');
+    
+    }
 }

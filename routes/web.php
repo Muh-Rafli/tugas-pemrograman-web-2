@@ -18,6 +18,7 @@ Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->n
 
 Route::get('produk/trash', [ProdukController::class, 'trash'])->name('produk.trash');
 Route::put('produk/{produk}/restore', [ProdukController::class, 'restore'])->name('produk.restore')->withTrashed();
+Route::delete('/produk/{produk}/force-delete', [ProdukController::class, 'forceDelete'])->name('produk.forceDelete')->withTrashed();
 
 Route::resource('kategori', KategoriController::class);
 Route::resource('produk', ProdukController::class);
